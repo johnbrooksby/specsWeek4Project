@@ -12,18 +12,22 @@ const Auth = () => {
   const submitHandler = (e) => {
     e.preventDefault();
 
-    let maBod = {
+    const maBod = {
       username,
       password,
     };
 
-    const URL = "https://socialmtn.devmountain.com";
+    const URL = "http://localhost:5050";
 
     axios
-      .post(URL + register ? "/register" : "/login", maBod)
+      .post(register ? "http://localhost:5050/register" : "http://localhost:5050/login", maBod)
       .then((res) => {
-        authCtx.login(res.data.token, res.data.exp, res.data.userId);
         console.log(res.data);
+        setRegister(res)
+        authCtx.login(res.data.token, res.data.exp, res.data.userId);
+        setUsername('')
+        setPassword('')
+
       })
       .catch((err) => {
         console.error(err);
@@ -49,7 +53,7 @@ const Auth = () => {
           onChange={(e) => setPassword(e.target.value)}
           className="form-input"
         />
-        <button className="form-btn">{register ? "Sign Up" : "Login"}</button>
+        <button className="form-btn" >{register ? "Sign Up" : "Login"} </button>
       </form>
       <button className="form-btn" onClick={() => setRegister(!register)}>
         Need to {register ? "Login" : "Sign Up"}?

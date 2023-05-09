@@ -8,24 +8,22 @@ const {Post} = require('./models/Post')
 
 const {getAllPosts, getCurrentUserPosts, addPost, editPost, deletePost} = require("./controllers/Posts")
 const {isAuthenticated} = require("./middleware/isAuthenticated")
-const {register, login, logout} = require("./controllers/Auth")
+const {register, login} = require("./controllers/Auth")
 
 const app = express()
 
 User.hasMany(Post)
 Post.belongsTo(User)
 
-
 app.use(express.json())
 app.use(cors())
 
 app.post('/register', register)
 app.post('/login', login)
-app.post('/logout', logout)
 
 app.get('/posts', getAllPosts)
 
-app.get('/userPosts/:id', getCurrentUserPosts)
+app.get('/userPosts/:userId', getCurrentUserPosts)
 app.post('/posts', isAuthenticated, addPost)
 app.put('/posts/:id', isAuthenticated, editPost)
 app.delete('/posts/:id', isAuthenticated, deletePost)
