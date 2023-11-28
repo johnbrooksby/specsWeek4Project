@@ -12,15 +12,8 @@ const Auth = () => {
   const submitHandler = (e) => {
     e.preventDefault();
 
-    const maBod = {
-      username,
-      password,
-    };
-
-    const URL = "http://localhost:5050";
-
     axios
-      .post(register ? "http://localhost:5050/register" : "http://localhost:5050/login", maBod)
+      .post(register ? "http://localhost:5051/register/" : "http://localhost:5051/login/", {username, password})
       .then((res) => {
         console.log(res.data);
         setRegister(res)
@@ -43,19 +36,24 @@ const Auth = () => {
       <h1>Welcome!</h1>
       <form className="form auth-form" onSubmit={submitHandler}>
         <input
+          autoFocus
+          placeholder="Username"
           value={username}
           onChange={(e) => setUsername(e.target.value)}
           className="form-input"
+          required
         />
         <input
+          placeholder="Password"
           type="password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           className="form-input"
+          required
         />
         <button className="form-btn" >{register ? "Sign Up" : "Login"} </button>
       </form>
-      <button className="form-btn" onClick={() => setRegister(!register)}>
+      <button className="form-btn" onClick={() => setRegister(prev => !prev)}>
         Need to {register ? "Login" : "Sign Up"}?
       </button>
     </main>
