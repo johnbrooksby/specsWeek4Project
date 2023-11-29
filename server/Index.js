@@ -18,15 +18,15 @@ Post.belongsTo(User)
 app.use(express.json())
 app.use(cors())
 
-app.post('/register', register)
-app.post('/login', login)
+app.post('/api/register', register)
+app.post('/api/login', login)
 
-app.get('/posts', getAllPosts)
+app.get('/api/posts', getAllPosts)
 
-app.get('/userPosts/:userId', getCurrentUserPosts)
-app.post('/posts', isAuthenticated, addPost)
-app.put('/posts/:id', isAuthenticated, editPost)
-app.delete('/posts/:id', isAuthenticated, deletePost)
+app.get('/api/userPosts/:userId', getCurrentUserPosts)
+app.post('/api/posts', isAuthenticated, addPost)
+app.put('/api/posts/:id', isAuthenticated, editPost)
+app.delete('/api/posts/:id', isAuthenticated, deletePost)
 
 // sequelize.sync({force: true})
 sequelize.sync()

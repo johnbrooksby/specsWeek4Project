@@ -13,7 +13,7 @@ const Auth = () => {
     e.preventDefault();
 
     axios
-      .post(register ? "http://localhost:5051/register/" : "http://localhost:5051/login/", {username, password})
+      .post(register ? "http://localhost:5051/api/register/" : "http://localhost:5051/api/login/", {username, password})
       .then((res) => {
         console.log(res.data);
         setRegister(res)
@@ -28,7 +28,7 @@ const Auth = () => {
         setPassword("");
       });
 
-    console.log("submitHandler called");
+    // console.log("submitHandler called");
   };
 
   return (

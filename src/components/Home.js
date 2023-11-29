@@ -1,7 +1,3 @@
-
-// YOU WILL BE INSTRUCTED WHEN YOU SHOULD 
-// UNCOMMENT THIS CODE
-
 import {useState, useEffect, useContext} from 'react'
 import axios from 'axios'
 
@@ -13,7 +9,7 @@ const Home = () => {
     const [posts, setPosts] = useState([])
 
     useEffect(() => {
-        axios.get('/posts')
+        axios.get('/api/posts')
         .then(res => {
             if (userId) {
                 const otherUsersPosts = res.data.filter(post => userId !== post.userId)
